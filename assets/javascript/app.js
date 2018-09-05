@@ -1,4 +1,4 @@
-//make buttons have a value, if value equals correct answer add to correct number
+
 
 var correct = 0;
 var wrong = 0;
@@ -6,16 +6,27 @@ var counter = 91;
 var click = false;
 var intervalId; 
 
-var a1 = "1939";
-var b1 = "1945";
-var correct1 = "1939";
 
 var quizStart = 
     "<h1> In what year did World War II begin? </h1>" +
     "<br>"+
-    "<input type='radio' name='q1' id='a1'>" + a1 + "</input>" + 
+    "<input type='radio' name='q1' value='1'>" + "1939" + "</input>" + 
     "<br>"+ 
-    "<input type='radio' name='q1' id='b1'>" + b1 + "</input>" + 
+    "<input type='radio' name='q1' value='0'>" + "1951" + "</input>" + 
+    "<br>"+
+    "<input type='radio' name='q1' value='0'>" + "1941" + "</input>" + 
+    "<br>"+
+    "<input type='radio' name='q1' value='0'>" + "1918" + "</input>" + 
+    "<br>"+
+    "<h1> Who was the President of the United States at the end of World War II? </h1>" +
+    "<br>"+
+    "<input type='radio' name='q2' value='1'>" + "Harry Truman" + "</input>" + 
+    "<br>"+ 
+    "<input type='radio' name='q2' value='0'>" + "Donald Trump" + "</input>" + 
+    "<br>"+
+    "<input type='radio' name='q2' value='0'>" + "George Washington" + "</input>" + 
+    "<br>"+
+    "<input type='radio' name='q2' value='0'>" + "FDR" + "</input>" + 
     "<br>"+
     "<button type='submit' id='submit'> Submit </button>";
 
@@ -46,28 +57,37 @@ function stop() {
     clearInterval(intervalId);
 }
 
-function resultCheck() {
-    if (a1 === correct1) {
-        correct++;
-    }
-}
+
+
+   
+
 
 $(document).ready(function () {
 
-
+    
 
 $("#start").on("click", function () {
 $("#questions").append(quizStart); 
    timer();
    $("#start").empty();
 
+
 $("#a1").on("click", function () {
    
-
 }); 
 
 $("#submit").on("click", function() {
-    resultCheck();
+    var result = $('input[type="radio"]:checked');
+    if (result.val() > 0) {
+        alert("win");
+        correct++;
+        console.log("correct: " + correct); //prints correct number in log but on on page, need to adjust to it factors in for second question
+    }
+    else {
+       alert("lose");
+       wrong++;
+       console.log("wrong: " + wrong);
+    }
     stop();
     $("#questions, #start, #timer").empty();
     $("#questions").append(htmlOver);
